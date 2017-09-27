@@ -57,33 +57,17 @@ the code.
 
 * Provide a complete implementation for the headers and footers.
 
-=== Some Examples
-Okay, so how is the library used. Well lets look at some examples to see if we
-can cast a little light on the matter. The examples provided here assume that
-you are already familiar with the Ruby language. So, for a start, consider...
-
-   require 'rubygems'
+=== Examples
    require 'rtf'
-
-The first thing to look at here at the are the first two lines. The RTF library
-is provided as a Ruby gem and these two lines load the libraries functionality
-into the script. The third line of code includes the RTF module into the current
-name space. This is a convenience mechanism that saves on specifically having
-to refer to the module when accessing the RTF library. Next we want to create
-an RTF document and that is done like this...
-
    document = RTF::Document.new(RTF::Font.new(RTF::Font::ROMAN, 'Times New Roman'))
 
-This line of code creates a new Document object, specifying that the default
+This creates a new Document object, specifying that the default
 font for the document will the the Times New Roman font. So we have a document,
-what can we do with it. Well, lets add a short paragraph of text...
+what can we do with it. Let's add a short paragraph of text...
 
    document.paragraph << "This is a short paragraph of text."
 
-That's fine, but what if we wanted to extend that paragraph or we simply wanted
-to add more text than we've added here? Well, the paragraph method accepts a
-block to which it passes the actual paragraph object, so we could do something
-like the following...
+The paragraph method accepts a block to which it passes the actual paragraph object.
 
    document.paragraph do |p|
       p << "This is the first sentence in the paragraph. "
@@ -96,34 +80,31 @@ the scope of a document element. Lets see a more complicated example of this
 in which we apply a number of document effects. Lets say that we want to insert
 some code into the document. We want the code to appear in the document slightly
 indented on the left hand side, in a non-proportionately space font and we want
-it in bold text. Heres the code that shows how to do that...
+it in bold text. Here's the code that shows how to do that...
 
-   01 code_para = ParagraphStyle.new
-   02 code_para.left_indent = 200
-   03
-   04 code_char = CharacterStyle.new
-   05 code_char.font = RTF::Font::MODERN
-   06 code_char.bold = true
-   07
-   08 document.paragraph(code_para) do |p|
-   09   p.apply(code_char) do |c|
-   10     c << "count = 0"
-   11     c.line_break
-   12     c << "File.open('file.txt', 'r') do |file|"
-   13     c.line_break
-   14     c << "   file.each_line {|line| count += 1}"
-   15     c.line_break
-   16     c << "end"
-   17     c.line_break
-   18     c << "puts \"File contains \#{count} lines.\""
-   19   end
-   20 end
+   code_para = ParagraphStyle.new
+   code_para.left_indent = 200
 
-This is a much larger piece of code and covers a number of topics that need to
-be addressed. I have included line numbers with code so that individual elements
-can be referenced. Lines 1 to 6 are the first new elements. Here we create
-two style objects, one that can be applied to paragraphs and one that applies
-to characters.
+   code_char = CharacterStyle.new
+   code_char.font = RTF::Font::MODERN
+   code_char.bold = true
+
+   document.paragraph(code_para) do |p|
+     p.apply(code_char) do |c|
+       c << "count = 0"
+       c.line_break
+       c << "File.open('file.txt', 'r') do |file|"
+       c.line_break
+       c << "   file.each_line {|line| count += 1}"
+       c.line_break
+       c << "end"
+       c.line_break
+       c << "puts \"File contains \#{count} lines.\""
+     end
+   end
+
+The code above includes two style objects, one that can be applied to paragraphs
+and one that applies to characters.
 
 On line 2 we set the left indentation value of the paragraph style to 200 *twips*.
 A twip is a type setting measurement that equates to one twentieth of a point
@@ -163,12 +144,9 @@ rather than trying to add a string containing "\n". RTF is a text based standard
 and won't treat "\n" as you're expecting.
 
 Okay, so we've seen have the basics of creating a document and adding elements
-to that document. How do we get what we've created to a file. Well thats
-actually quite straight forward. As was mentioned previously, RTF is a text
-based standard so you simply generate the RTF and write it to a file. Heres an
-example...
+to that document. Now to generate the RTF and write it to a file.
 
-   File.open('my_document.rtf') {|file| file.write(document.to_rtf)}
+   File.open('my_document.rtf') { |file| file.write(document.to_rtf) }
 
 There you have it. You've been given a quick overview of the basics of using
 the library. For more information consult the HTML based API documentation that
