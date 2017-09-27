@@ -165,7 +165,7 @@ actually quite straight forward. As was mentioned previously, RTF is a text
 based standard so you simply generate the RTF and write it to a file. Heres an
 example...
 
-   File.open('my_document.rtf', 'w') {|file| file.write(document.to_rtf)} # existing file by this name will be overwritten
+   File.open('my_document.rtf', 'w') { |file| file.write(document.to_rtf) } # existing file by this name will be overwritten
 
 There you have it. You've been given a quick overview of the basics of using
 the library. For more information consult the HTML based API documentation that

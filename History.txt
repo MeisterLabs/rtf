@@ -1,3 +1,6 @@
+=== 0.5.1 / 2017-09-27
+* Removed HTML converter (tidy-ext is not compatible with Windows)
+
 === 0.5.0 / 2012-01-05
 
 * Added test for utf8. Test load implementation of rtf library on same path first [Claudio Bustos]

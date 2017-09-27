@@ -12,7 +12,7 @@ examples/example04.rb
 examples/rubyrtf.bmp
 examples/rubyrtf.jpg
 examples/rubyrtf.png
-ifad-rtf.gemspec
+rtf.gemspec
 lib/rtf.rb
 lib/rtf/colour.rb
 lib/rtf/converters.rb
