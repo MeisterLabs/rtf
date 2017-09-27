@@ -1,6 +1,7 @@
 = rtf
 
 * https://github.com/MeisterLabs/rtf
+This is a fork of https://github.com/clbustos/rtf.
 
 == DESCRIPTION:
 
